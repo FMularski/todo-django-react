@@ -1,7 +1,10 @@
+import Tasks from './components/Tasks'; 
 
 function App() {
   return (
-    <div></div>
+    <div>
+      <Tasks />
+    </div>
   );
 }
 
