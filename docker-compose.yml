@@ -5,7 +5,7 @@ services:
     image: postgres
     env_file:
       - ./backend/todo/.env
-  web:
+  backend:
     build:
       context: ./backend
     command:  gunicorn todo.wsgi:application --bind 0.0.0.0:8000 --reload
@@ -15,4 +15,18 @@ services:
       - 8000:8000
     depends_on:
       db:
+        condition: service_started
+  frontend:
+    build:
+      context: ./frontend
+    command: npm start
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/code
+      - /code/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    depends_on:
+      backend:
         condition: service_started
