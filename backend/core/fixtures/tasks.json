@@ -1,0 +1,26 @@
+[
+    {
+        "model": "core.Task",
+        "pk": 1,
+        "fields": {
+            "title": "Task 1",
+            "completed": true 
+        }
+    },
+    {
+        "model": "core.Task",
+        "pk": 2,
+        "fields": {
+            "title": "Task 2",
+            "completed": true 
+        }
+    },
+    {
+        "model": "core.Task",
+        "pk": 3,
+        "fields": {
+            "title": "Task 3",
+            "completed": false 
+        }
+    }
+]
