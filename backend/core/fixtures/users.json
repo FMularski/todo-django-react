@@ -1,0 +1,74 @@
+[
+{
+    "model": "core.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$vKRf5gPKNwQHKCRGuylMQb$4PogcTcWnyJw0yQJfHDMVe2bWWjK6NVMnI07K3fKZs8=",
+        "last_login": null,
+        "is_superuser": true,
+        "username": "admin",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-06-04T16:05:52.137Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "core.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$Ck6EFgFloIHD2Kb2Qhio39$WvTEIbkw/jV/6uDEgo6OLUP8fKWb2QPx9DSuiNlYpQU=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "user",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-06-04T16:30:39.652Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "core.user",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$1PHKss2ji4fuTdy05ofstS$xkifLnOD7eFXLIuKEqefFRv6DO2T3jS3Q06D7Suy7xw=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "user2",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-06-04T16:30:45.249Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "core.user",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$jnNGZwUoZhrGIg0nUhzctt$3gk4uiACCex7XigN3gK4DY81AVSuc28PW9ESgHZG+hM=",
+        "last_login": null,
+        "is_superuser": false,
+        "username": "user3",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-06-04T16:30:49.677Z",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
