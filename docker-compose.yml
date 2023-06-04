@@ -5,17 +5,24 @@ services:
     image: postgres
     env_file:
       - ./backend/todo/.env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
   backend:
     build:
       context: ./backend
-    command:  gunicorn todo.wsgi:application --bind 0.0.0.0:8000 --reload
+    command:  > 
+      sh -c "python manage.py migrate && 
+             gunicorn todo.wsgi:application --bind 0.0.0.0:8000 --reload"
     volumes:
       - ./backend:/code
     ports:
       - 8000:8000
     depends_on:
       db:
-        condition: service_started
+        condition: service_healthy
   frontend:
     build:
       context: ./frontend
