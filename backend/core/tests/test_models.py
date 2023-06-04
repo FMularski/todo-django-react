@@ -3,33 +3,9 @@ import json
 import pytest
 from core import models
 from django.conf import settings
-from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
 from django.core.management import call_command
 from django.db.utils import IntegrityError
-
-User = get_user_model()
-
-"""
-    Fixtures
-"""
-
-
-@pytest.fixture
-def create_user():
-    def create(**fields):
-        return User.objects.create_user(**fields)
-
-    return create
-
-
-@pytest.fixture
-def create_task():
-    def create(**fields):
-        return models.Task.objects.create(**fields)
-
-    return create
-
 
 """
     User model tests.
@@ -63,9 +39,9 @@ def test_users_command_fixture():
         data = json.loads(fixture_file.read())
         users_count = len(data)
 
-    assert User.objects.count() == 0
+    assert models.User.objects.count() == 0
     call_command("loaddata", "users.json")
-    assert User.objects.count() == users_count
+    assert models.User.objects.count() == users_count
 
 
 """
