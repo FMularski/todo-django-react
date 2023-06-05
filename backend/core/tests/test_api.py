@@ -75,3 +75,54 @@ def test_get_task_404(api_client):
     response = api_client.get(url)
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
+
+
+@pytest.mark.django_db
+@pytest.mark.parametrize(
+    "method, body, xstatus",
+    [
+        ("put", {"title": "Updated", "completed": True}, status.HTTP_200_OK),
+        ("put", {"title": "Updated"}, status.HTTP_200_OK),
+        ("put", {"completed": True}, status.HTTP_400_BAD_REQUEST),
+        ("put", {}, status.HTTP_400_BAD_REQUEST),
+        ("patch", {"title": "Updated", "completed": True}, status.HTTP_200_OK),
+        ("patch", {"title": "Updated"}, status.HTTP_200_OK),
+        ("patch", {"completed": True}, status.HTTP_200_OK),
+        ("patch", {}, status.HTTP_200_OK),
+    ],
+)
+def test_put_task(api_client, create_task, method, body, xstatus):
+    task = create_task(title="Task 1")
+    url = reverse("task", kwargs={"pk": task.pk})
+
+    api_client_method = getattr(api_client, method)
+    response = api_client_method(url, data=body)
+
+    assert response.status_code == xstatus
+
+    if xstatus == status.HTTP_200_OK:
+        task.refresh_from_db()
+
+        if "title" in body:
+            assert task.title == body.get("title")
+        if "completed" in body:
+            assert task.completed == body.get("completed")
+
+
+@pytest.mark.django_db
+def test_delete_task_204(api_client, create_task):
+    task = create_task(title="Task 1")
+    url = reverse("task", kwargs={"pk": task.pk})
+
+    response = api_client.delete(url)
+
+    assert response.status_code == status.HTTP_204_NO_CONTENT
+
+
+@pytest.mark.django_db
+def test_delete_task_404(api_client, create_task):
+    url = reverse("task", kwargs={"pk": 100})
+
+    response = api_client.delete(url)
+
+    assert response.status_code == status.HTTP_404_NOT_FOUND

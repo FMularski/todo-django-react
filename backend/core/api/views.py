@@ -16,8 +16,16 @@ class TaskListView(generics.ListCreateAPIView):
         return super().post(request, *args, **kwargs)
 
 
-class TaskDetailView(generics.RetrieveAPIView):
-    """Get the task object with the particular id."""
+class TaskDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """Update the task object with the particular id."""
 
     serializer_class = TaskSerializer
     queryset = Task.objects.all()
+
+    @extend_schema(description="Get the task object with the particular id.")
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
+    @extend_schema(description="Delete the task object with the particular id.")
+    def delete(self, request, *args, **kwargs):
+        return super().delete(request, *args, **kwargs)
