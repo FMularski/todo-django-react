@@ -14,3 +14,10 @@ class TaskListView(generics.ListCreateAPIView):
     @extend_schema(description="Create a new task.")
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
+
+
+class TaskDetailView(generics.RetrieveAPIView):
+    """Get the task object with the particular id."""
+
+    serializer_class = TaskSerializer
+    queryset = Task.objects.all()

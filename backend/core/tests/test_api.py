@@ -50,8 +50,28 @@ def test_post_task_200(api_client, body):
 
 @pytest.mark.django_db
 @pytest.mark.parametrize("body", [{}, {"completed": True}, {"title": "A" * 201}])
-def test_post_task_400(api_client, body):
+def test_post_tasks_400(api_client, body):
     url = reverse("tasks")
     response = api_client.post(url, data=body)
 
     assert response.status_code == status.HTTP_400_BAD_REQUEST
+
+
+@pytest.mark.django_db
+def test_get_task_200(api_client, create_task):
+    task = create_task(title="Task 1")
+    url = reverse("task", kwargs={"pk": task.pk})
+
+    serializer = TaskSerializer(task)
+    response = api_client.get(url)
+
+    assert response.status_code == status.HTTP_200_OK
+    assert response.json() == serializer.data
+
+
+@pytest.mark.django_db
+def test_get_task_404(api_client):
+    url = reverse("task", kwargs={"pk": 100})
+    response = api_client.get(url)
+
+    assert response.status_code == status.HTTP_404_NOT_FOUND
