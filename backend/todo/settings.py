@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "core.apps.CoreConfig",
+    "library.apps.LibraryConfig",
     "drf_spectacular",
 ]
 
